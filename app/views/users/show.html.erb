@@ -1,0 +1,49 @@
+<h1><%= @user.profile.name %></h1>
+
+<p><%= image_tag @user.profile.avatar.url(:medium) %></p>
+
+<p>
+	<b>E-mail:</b>
+	<%= @user.email %>
+</p>
+
+<p>
+	<b>Title:</b>
+	<%= @user.profile.title %>
+</p>
+
+<p>
+	<b>Work number:</b>
+	<%= @user.profile.work_number %>
+</p>
+
+<p>
+	<b>Mobile number:</b>
+	<%= @user.profile.mobile_number %>
+</p>
+
+<p>
+	<b>Fax number:</b>
+	<%= @user.profile.fax_number %>
+</p>
+
+<p>
+	<b>Home number:</b>
+	<%= @user.profile.home_number %>
+</p>
+
+<p>
+	<b>Admin?</b>
+	<%= @user.admin? ? "Yes" : "No" %>
+</p>
+
+<p>
+	<b>Participating in:</b>
+	<ul>
+	<% @user.projects.each do |project| %>
+		<li><%= link_to project.title, project_path(project) %></li>
+	<% end %>
+	</ul>
+</p>
+
+<p><%= link_to 'Edit profile', edit_user_path(@user) if @user.id == current_user.id || @user.admin? == false %></p>

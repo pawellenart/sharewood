@@ -1,0 +1,19 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Title</th>
+    <th></th>
+		<th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.profile.name %></td>
+    <td><%= user.profile.title %></td>
+    <td><%= link_to 'Show', user %></td>
+		<td><%= link_to 'Edit', edit_user_path(user) if user.id == current_user.id || user.admin? == false %>
+  </tr>
+<% end %>
+</table>

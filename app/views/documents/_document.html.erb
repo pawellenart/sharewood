@@ -1,0 +1,8 @@
+<p>
+	<b><%= document.title %></b> (by <%= document.user.profile.name %>)<br />
+	<%= document.description %><br />
+	<%= link_to 'Download', document.resource.url %>
+	<% if current_user.admin? || document.user_id == current_user.id %>
+	<%= link_to 'Delete', project_document_path(:project_id => @project, :id => document), :confirm => 'Are you sure?', :method => :delete %>
+	<% end %>
+</p>

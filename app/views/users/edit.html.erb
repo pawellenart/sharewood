@@ -1,0 +1,50 @@
+<%= form_for(@user, :html => { :multipart => true }) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<%= f.fields_for :profile do |pf| %>
+	<div class="field">
+    <%= pf.label :avatar %><br />
+    <%= pf.file_field :avatar %>
+  </div>
+  <div class="field">
+    <%= pf.label :name %><br />
+    <%= pf.text_field :name %>
+  </div>
+  <div class="field">
+    <%= pf.label :title %><br />
+    <%= pf.text_field :title %>
+  </div>
+	<div class="field">
+    <%= pf.label :work_number %><br />
+    <%= pf.text_field :work_number %>
+  </div>
+	<div class="field">
+    <%= pf.label :mobile_number %><br />
+    <%= pf.text_field :mobile_number %>
+  </div>
+	<div class="field">
+    <%= pf.label :fax_number %><br />
+    <%= pf.text_field :fax_number %>
+  </div>
+	<div class="field">
+    <%= pf.label :home_number %><br />
+    <%= pf.text_field :home_number %>
+  </div>
+	<% end %>
+	<div class="field">
+		<%= f.check_box :admin %> <%= f.label :admin %>?<br />
+	</div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

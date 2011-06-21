@@ -1,0 +1,8 @@
+<p>
+	<%= image_tag comment.user.profile.avatar.url(:thumb) %> <b><%= comment.user.profile.name %> on <i><%= comment.created_at %></i>:</b><br />
+	<%= comment.content %>
+	<% if current_user.admin? || comment.user_id == current_user.id %>
+	<br />
+	<%= link_to 'Delete', project_comment_path(:project_id => @project, :id => comment), :confirm => 'Are you sure?', :method => :delete %>
+	<% end %>
+</p>

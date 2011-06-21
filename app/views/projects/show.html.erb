@@ -1,0 +1,36 @@
+<h2><%= @project.title %> - Summary</h2>
+
+<p>
+  <b>Description:</b>
+  <%= @project.description %>
+</p>
+
+<p>
+	<b>Participants:</b>
+	<ul>
+	<% @project.users.each do |user| %>
+		<li><%= image_tag user.profile.avatar.url(:thumb) %> <%= link_to user.profile.name, user_path(user) %></li>
+	<% end %>
+	</ul>
+</p>
+
+<% if current_user.admin? %>
+	<%= link_to 'Edit', edit_project_path(@project) %>
+<% end %>
+<hr />
+
+<h2>Documents</h2>
+
+<%= render @project.documents %>
+
+<%= render :file => 'documents/new' %>
+
+<hr />
+
+<h2>Comments</h2>
+
+<%= render @project.comments %>
+
+<%= render :file => 'comments/new' %>
+
+<%= link_to 'Back', projects_path %>

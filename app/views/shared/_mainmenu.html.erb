@@ -1,0 +1,19 @@
+<% if user_signed_in? %>
+	<h1>
+	<% if current_user.profile.name.blank? %>
+		Dashboard | Sharewood
+	<% else %>
+		<%= current_user.profile.name %>'s Dashboard | Sharewood
+	<% end %>
+	</h1>
+
+	<p>
+		<%= link_to 'My Profile', user_path(current_user.id) %> |
+		<%= link_to 'Projects', projects_path %> |
+		<% if current_user.admin? %>
+			<%= link_to 'Users', users_path %> |
+		<% end %>
+		<%= link_to 'Logout (' + (current_user.profile.name? ? current_user.profile.name : current_user.email) + ')', destroy_user_session_path %>
+	</p>
+	<hr />
+<% end %>
