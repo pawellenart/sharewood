@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :check_for_profile
   
   def index
     redirect_to(user_path(current_user), :alert => 'You are not allowed to do that') and return unless current_user.admin?
@@ -23,7 +22,7 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find(params[:id])
-    redirect_to(user_path(current_user), :alert => 'You are not allowed to do that') and return unless @user == current_user
+    redirect_to(user_path(current_user), :alert => 'You are not allowed to do that') and return unless @user == current_user || current_user.admin?
   end
   
   def update
@@ -37,14 +36,4 @@ class UsersController < ApplicationController
       end
     end
   end
-  
-  private
-  
-  def check_for_profile
-    @user = User.find(params[:id])
-    if @user.profile.nil?
-      @user.profile = Profile.create()
-    end
-  end
-
 end

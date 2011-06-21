@@ -1,5 +1,5 @@
 <p>
-	<%= image_tag comment.user.profile.avatar.url(:thumb) %> <b><%= comment.user.profile.name %> on <i><%= comment.created_at %></i>:</b><br />
+	<%= image_tag comment.user.profile.avatar.url(:thumb) %> <b><%= comment.user.profile.name %> <i><%= time_ago_in_words(comment.created_at) %> ago</i>:</b><br />
 	<%= comment.content %>
 	<% if current_user.admin? || comment.user_id == current_user.id %>
 	<br />

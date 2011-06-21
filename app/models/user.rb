@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :documents
   
+  after_create :generate_user_profile
+  
   validates_with ParticipationValidator
   
   accepts_nested_attributes_for :profile
@@ -22,4 +24,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :admin, :profile_attributes
+  
+  def generate_user_profile
+    create_profile
+  end
 end
