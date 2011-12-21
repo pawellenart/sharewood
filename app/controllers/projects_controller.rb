@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :user_after_sign_up?
-  
+
   # GET /projects
   # GET /projects.xml
   def index
@@ -36,7 +36,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     redirect_to projects_url, :alert => "You are not allowed to do that" and return unless current_user.admin?
-    
+
     @project = Project.new
     @users = User.where(:admin => false)
 
@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     redirect_to projects_url, :alert => "You are not allowed to do that" and return unless current_user.admin?
-    
+
     @project = Project.find(params[:id])
     @users = User.where(:admin => false)
   end
@@ -74,7 +74,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1.xml
   def update
     params[:project][:user_ids] ||= []
-    
+
     @project = Project.find(params[:id])
 
     respond_to do |format|
@@ -99,9 +99,9 @@ class ProjectsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   private
-  
+
   def user_after_sign_up?
     if current_user.profile.nil?
       redirect_to edit_user_path(current_user), :alert => 'You have to fill out your details first'

@@ -5,9 +5,9 @@ Sharewood::Application.routes.draw do
     resources :comments
     resources :documents
   end
-  
+
   resources :users
-  
+
   match 'profile' => 'users#show', :as => :profile
   match 'profile/edit' => 'users#edit', :as => :profile_edit
 
