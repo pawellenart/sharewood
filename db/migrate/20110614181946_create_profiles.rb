@@ -10,7 +10,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :home_number
 
       t.timestamps
-      
+
       t.belongs_to :user
     end
   end
